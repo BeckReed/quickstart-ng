@@ -1,5 +1,4 @@
 # Angular QuickStart Source
-## Angular 2 quickstart project
 [![Build Status][travis-badge]][travis-badge-url]
 
 This repository holds the TypeScript source code of the [angular.io quickstart](https://angular.io/docs/ts/latest/quickstart.html),

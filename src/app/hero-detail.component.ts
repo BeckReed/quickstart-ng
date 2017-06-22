@@ -8,17 +8,8 @@ import {HeroService} from './hero.service';
 
 @Component({
     selector:'hero-detail',
-    template:`
-        <div *ngIf="hero">
-            <h2>{{hero.name}} details</h2>
-            <div><label>id: </label>{{hero.id}}</div>
-            <div><label>name: </label>{{hero.name}}</div>
-            <div>
-            <label>name:</label>
-            <input [(ngModel)]="hero.name" placeholder="type hero name here">
-            </div>
-        </div>
-    `
+    templateUrl:'./hero-detail.component.html',
+    styleUrls:['./hero-detail.component.css']
 })
 
 export class HeroDetailComponent implements OnInit{
@@ -35,6 +26,16 @@ export class HeroDetailComponent implements OnInit{
             .switchMap((params:Params)=>
             this.heroService.getHero(+params['id']))
                 .subscribe(hero => this.hero=hero);
-            
+        //英雄的id是数字，而路由参数的值总是字符串。 所以我们需要通过 JavaScript 的 (+) 操作符把路由参数的值转成数字。            
+    }
+
+    goBack():void{
+        console.log(this.location);
+        this.location.back();
+    }
+
+    save(): void{
+        this.heroService.update(this.hero)
+            .then(() => this.goBack());
     }
 }

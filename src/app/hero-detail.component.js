@@ -27,6 +27,16 @@ var HeroDetailComponent = (function () {
             return _this.heroService.getHero(+params['id']);
         })
             .subscribe(function (hero) { return _this.hero = hero; });
+        //英雄的id是数字，而路由参数的值总是字符串。 所以我们需要通过 JavaScript 的 (+) 操作符把路由参数的值转成数字。            
+    };
+    HeroDetailComponent.prototype.goBack = function () {
+        console.log(this.location);
+        this.location.back();
+    };
+    HeroDetailComponent.prototype.save = function () {
+        var _this = this;
+        this.heroService.update(this.hero)
+            .then(function () { return _this.goBack(); });
     };
     return HeroDetailComponent;
 }());
@@ -37,7 +47,8 @@ __decorate([
 HeroDetailComponent = __decorate([
     core_1.Component({
         selector: 'hero-detail',
-        template: "\n        <div *ngIf=\"hero\">\n            <h2>{{hero.name}} details</h2>\n            <div><label>id: </label>{{hero.id}}</div>\n            <div><label>name: </label>{{hero.name}}</div>\n            <div>\n            <label>name:</label>\n            <input [(ngModel)]=\"hero.name\" placeholder=\"type hero name here\">\n            </div>\n        </div>\n    "
+        templateUrl: './hero-detail.component.html',
+        styleUrls: ['./hero-detail.component.css']
     }),
     __metadata("design:paramtypes", [hero_service_1.HeroService,
         router_1.ActivatedRoute,
