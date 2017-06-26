@@ -40,7 +40,7 @@ var HeroService = (function () {
             .catch(this.handleError);
     };
     HeroService.prototype.create = function (name) {
-        return this.http.post(this.heroesUrl, JSON.stringify({ name: name }, { headers: this.headers }))
+        return this.http.post(this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
             .toPromise()
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
